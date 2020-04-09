@@ -1,3 +1,3 @@
-const apiHost = "http://localhost:3000";
+const apiHost = "https://ia-sycomp-backend.herokuapp.com";
 
 export { apiHost };
