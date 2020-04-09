@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  padding: 10px;
+  background-color: black;
+}
+
+table {
+  /* display: flex; */
+  /* flex-direction: column; */
+  width: 100%;
+}
+thead {
+  font-weight: bold;
+}
+table tr td:nth-child(2) {
+  flex: none;
+  width: 90%;
+}
+table tr td:first-child {
+  width: 10%;
+}
+table tr td {
+  text-align: center;
+}
+table tr td img {
+  max-width: 100%;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
