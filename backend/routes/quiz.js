@@ -5,7 +5,7 @@ const fs = require("fs");
 const Quiz = require("../models/quiz");
 
 router.use(fileUpload());
-const host = "http://localhost:3000/";
+const { host } = require("../config");
 
 router.get("/getQuizes", async (req, res) => {
   res.send({
@@ -66,7 +66,7 @@ router.post("/addAnswer/:id", async (req, res) => {
     answers[questionNumber - 1] = { path };
     console.log(answers);
     const abc = await Quiz.update({ _id: quizId }, { $set: { answers } });
-    console.log(abc);
+    // console.log(abc);
 
     res.send({ code: 0, path });
   });
