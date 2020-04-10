@@ -28,7 +28,7 @@ class QuizPage extends React.Component {
         numberOfQuestions: quizData.numberOfQuestions,
         answers: quizData.answers,
       });
-    }, 2000);
+    }, 10000);
   }
 
   componentWillUnmount() {
