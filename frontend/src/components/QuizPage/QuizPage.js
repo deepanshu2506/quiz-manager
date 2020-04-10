@@ -14,19 +14,25 @@ class QuizPage extends React.Component {
     this.onChangeFile = this.onChangeFile.bind(this);
   }
   async componentDidMount() {
-    let quizData = (
-      await axios.get(apiHost + `/quiz/getQuiz/${this.props.match.params.id}`)
-    ).data;
-    if (!quizData.code) {
-      this.setState({ notFound: true });
-    }
-    quizData = quizData.quizData;
-    console.log(quizData);
-    this.setState({
-      quizName: quizData.quizName,
-      numberOfQuestions: quizData.numberOfQuestions,
-      answers: quizData.answers,
-    });
+    this.timer = setInterval(async () => {
+      let quizData = (
+        await axios.get(apiHost + `/quiz/getQuiz/${this.props.match.params.id}`)
+      ).data;
+      if (!quizData.code) {
+        this.setState({ notFound: true });
+      }
+      quizData = quizData.quizData;
+      console.log(quizData);
+      this.setState({
+        quizName: quizData.quizName,
+        numberOfQuestions: quizData.numberOfQuestions,
+        answers: quizData.answers,
+      });
+    }, 2000);
+  }
+
+  componentWillUnmount() {
+    this.timer = null;
   }
   async onChangeFile(event) {
     const file = event.target.files[0];
