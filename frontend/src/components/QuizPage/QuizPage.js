@@ -13,22 +13,25 @@ class QuizPage extends React.Component {
     this.generateAnswers = this.generateAnswers.bind(this);
     this.onChangeFile = this.onChangeFile.bind(this);
   }
+
+  fetchData = async () => {
+    let quizData = (
+      await axios.get(apiHost + `/quiz/getQuiz/${this.props.match.params.id}`)
+    ).data;
+    if (!quizData.code) {
+      this.setState({ notFound: true });
+    }
+    quizData = quizData.quizData;
+    console.log(quizData);
+    this.setState({
+      quizName: quizData.quizName,
+      numberOfQuestions: quizData.numberOfQuestions,
+      answers: quizData.answers,
+    });
+  };
   async componentDidMount() {
-    this.timer = setInterval(async () => {
-      let quizData = (
-        await axios.get(apiHost + `/quiz/getQuiz/${this.props.match.params.id}`)
-      ).data;
-      if (!quizData.code) {
-        this.setState({ notFound: true });
-      }
-      quizData = quizData.quizData;
-      console.log(quizData);
-      this.setState({
-        quizName: quizData.quizName,
-        numberOfQuestions: quizData.numberOfQuestions,
-        answers: quizData.answers,
-      });
-    }, 10000);
+    this.fetchData();
+    this.timer = setInterval(this.fetchData, 10000);
   }
 
   componentWillUnmount() {
