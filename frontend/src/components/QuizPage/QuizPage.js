@@ -65,7 +65,16 @@ class QuizPage extends React.Component {
           <td>{i + 1}</td>
           <td>
             {answers[i] ? (
-              <img src={answers[i].path} />
+              <div>
+                <img src={answers[i].path} />
+                <input
+                  questionNumber={i}
+                  type="File"
+                  ref={(el) => (this[`${i}upload`] = el)}
+                  onChange={this.onChangeFile}
+                  // hidden
+                />
+              </div>
             ) : (
               <input
                 questionNumber={i}

@@ -1,3 +1,5 @@
 */node_modules
 frontend/yarn.lock
 .netlify
+
+backend/aws-creds.js
