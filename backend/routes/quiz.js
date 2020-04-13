@@ -3,9 +3,10 @@ const fileUpload = require("express-fileupload");
 const fs = require("fs");
 
 const Quiz = require("../models/quiz");
+// const AWS = require("aws-sdk");
 
 router.use(fileUpload());
-const { host } = require("../config");
+const { host, staticHost } = require("../config");
 
 router.get("/getQuizes", async (req, res) => {
   res.send({
@@ -24,7 +25,7 @@ router.post("/addQuiz", async (req, res) => {
   });
 
   const quizData = await newQuiz.save();
-  res.send({ code: 1, quizData });
+  res.send({ code: 1, quizData, link: `${staticHost}/${quizData._id}` });
 });
 
 router.get("/getQuiz/:id", async (req, res) => {
